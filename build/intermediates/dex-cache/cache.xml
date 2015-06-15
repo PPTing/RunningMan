@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/PPTing/AndroidStudioProjects/RunningMan/app/libs/baidumapapi_v3_4_0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b119fced92bf2ce28881a5b8ac33b8c30d29bb40">
+        <dex dex="/Users/PPTing/AndroidStudioProjects/RunningMan/app/build/intermediates/pre-dexed/debug/baidumapapi_v3_4_0-2f1d5a40fe16be07c12653eecb4299463e798ef0.jar" />
+    </item>
+    <item
+        jar="/Users/PPTing/AndroidStudioProjects/RunningMan/app/libs/locSDK_5.3.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ef5a34dcc2783dfe0fb7a7b47745d14d36b4f523">
+        <dex dex="/Users/PPTing/AndroidStudioProjects/RunningMan/app/build/intermediates/pre-dexed/debug/locSDK_5.3-57248ff77d2e05d3569e5e7e67213d2adb6b7909.jar" />
+    </item>
+
+</items>
