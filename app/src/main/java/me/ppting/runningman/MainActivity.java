@@ -1,17 +1,20 @@
 package me.ppting.runningman;
 
 import android.app.Activity;
-import android.os.Bundle;
-import android.os.Message;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.Toast;
+import android.widget.ZoomControls;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -34,20 +37,14 @@ import com.baidu.mapapi.utils.DistanceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.os.Handler;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.Menu;
-import android.app.AlertDialog;
-import android.content.Intent;
-import android.text.InputType;
-import android.widget.SeekBar;
 
 public class MainActivity extends Activity //implements BDLocationListener
 {
     //导入百度地图
     public MapView mmapView = null;
     public BaiduMap mBaiduMap =null;
+    //去除百度logo
+
     //定位相关
     //定位的客户端
     private LocationClient mlocationClient;
@@ -130,12 +127,14 @@ public class MainActivity extends Activity //implements BDLocationListener
     @Override
     protected  void onCreate(Bundle savedInstanceState)
     {
+
+
         Log.d("MainActivity", "onCreate");
         super.onCreate(savedInstanceState);
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
         //注意该方法要再setContentView方法之前实现
         this.context=this;
-        SDKInitializer.initialize(this);
+        //SDKInitializer.initialize(this);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_main);
 
@@ -146,7 +145,18 @@ public class MainActivity extends Activity //implements BDLocationListener
         mmapView=(MapView)findViewById(R.id.bmapView);//获取百度地图控件实例
         mBaiduMap = mmapView.getMap();
         //mBaiduMap.setMapType(mBaiduMap.MAP_TYPE_SATELLITE);//卫星图
-        initid();//初始化按钮等
+
+        //去除百度logo 在获取地图控件后去除
+        View child = mmapView.getChildAt(1);
+        if(child!=null&&(child instanceof ImageView)||child instanceof ZoomControls)
+        {
+            child.setVisibility(View.INVISIBLE);
+        }
+        //去除缩放按钮
+        mmapView.showZoomControls(false);
+
+        //初始化按钮等
+        initid();
         init_dialog();
         init_thread();
         //初始化定位
@@ -452,22 +462,28 @@ public class MainActivity extends Activity //implements BDLocationListener
                     }else
                     {
                         LatLng mNextPoint = new LatLng(location.getLatitude(), location.getLongitude());//得到当前点
-                        Log.d("mnextpoint", "" + mNextPoint);
-                        Log.d("mfirstpoint", "" + mFirstPoint);
-                        //画折线
-                        List<LatLng> points = new ArrayList<LatLng>();
-                        points.add(mNextPoint);
-                        points.add(mFirstPoint);
-                        //折线属性
-                       OverlayOptions ooPolyline = new PolylineOptions().width(20)
-                                .color(0xAAFF0000).points(points);
-                        mBaiduMap.addOverlay(ooPolyline);
-                        //计算距离
-                        double distances = DistanceUtil.getDistance(mFirstPoint, mNextPoint);
-                        sum = sum + distances;
-                        Log.d("距离", "" + distances);
-                        Log.d("距离和", "" + sum);
-                        mFirstPoint = mNextPoint;
+                        if(DistanceUtil.getDistance(mFirstPoint,mNextPoint)>50)
+                        {
+                            //判断当前点是否太远，舍去
+                        }else
+                        {
+                            Log.d("mnextpoint", "" + mNextPoint);
+                            Log.d("mfirstpoint", "" + mFirstPoint);
+                            //画折线
+                            List<LatLng> points = new ArrayList<LatLng>();
+                            points.add(mNextPoint);
+                            points.add(mFirstPoint);
+                            //折线属性
+                            OverlayOptions ooPolyline = new PolylineOptions().width(20)
+                                    .color(0xAAFF0000).points(points);
+                            mBaiduMap.addOverlay(ooPolyline);
+                            //计算距离
+                            double distances = DistanceUtil.getDistance(mFirstPoint, mNextPoint);
+                            sum = sum + distances;
+                            Log.d("距离", "" + distances);
+                            Log.d("距离和", "" + sum);
+                            mFirstPoint = mNextPoint;
+                        }
                     }
 
                     if (isStopTag)//点击结束
@@ -637,7 +653,7 @@ public class MainActivity extends Activity //implements BDLocationListener
         android.util.Log.d("tageee", calories + " " + total_step + " " + sum + " " + timer);
         end_cal.setText(formatDouble(calories) + "");
         end_step.setText(total_step+"");
-        end_distance.setText(sum + "");
+        end_distance.setText(formatDouble(sum) + "");
         end_time.setText(getFormatTime(timer) + "");
         endalterdialog.show();
     }

@@ -27,7 +27,7 @@
 * 修改布局
 
 ##2015.6.15
-* 增加记录步数，距离，卡路里数据
+* 增加记录步数，距离，卡路里数据 By **刘伟**
 * 修改支持的最小SDK为 Android 5.0(Lollipop)
 ![测试截图](http://7ktpcg.com1.z0.glb.clouddn.com/RunningMan_2.png)
 * 下一步尝试修改主题，尝试一下**Android Material Design**
@@ -37,3 +37,9 @@
 
 ###已知Bug
 * Bug 3：点击第二次暂停后不会打点
+
+##2015.6.17
+* 修改为*伪* **Material Design** 样式
+* 去除地图上的百度地图Logo 和 缩放按钮
+![测试截图](http://7ktpcg.com1.z0.glb.clouddn.com/RunningMan测试截图2.png)
+* 下一步尝试增加动画效果

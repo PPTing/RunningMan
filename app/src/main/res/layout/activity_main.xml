@@ -8,102 +8,185 @@
         android:layout_height="fill_parent"
         android:clickable="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/record"/>
 
     <ImageButton
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:id="@+id/backtomylocation_button"
-        android:src="@mipmap/starticon"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:src="@mipmap/position"
+        android:layout_alignRight="@+id/bmapView"
+        android:layout_alignTop="@+id/bmapView"
+        android:background="@android:color/transparent"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/record"
+        >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/numberofstep"
+            android:text="步数"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:background="#BBDEFB"
+            android:textColor="#212121"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/distances"
+            android:text="距离"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:background="#BBDEFB"
+            android:textColor="#212121"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/calorie"
+            android:text="卡路里"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:background="#BBDEFB"
+            android:textColor="#212121"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_alignBottom="@id/bmapView">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/numberofstep"
-                android:text="步数"
-                android:layout_weight="1"
-                android:enabled="false"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/distances"
-                android:text="距离"
-                android:layout_weight="1"
-                android:enabled="false"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/calorie"
-                android:text="卡路里"
-                android:layout_weight="1"
-                android:enabled="false"/>
-        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:orientation="horizontal"
             >
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="开始"
-                android:onClick="onClick"
-                android:id="@+id/start_button"
-                android:visibility="visible"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_toRightOf="@+id/stop_button"
-                android:layout_weight="1"/>
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="暂停"
-                android:onClick="onClick"
-                android:id="@+id/pause_button"
-                android:visibility="gone"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_toRightOf="@+id/stop_button"
-                android:layout_weight="1"/>
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="继续"
-                android:onClick="onClick"
-                android:id="@+id/continue_button"
-                android:visibility="gone"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_toRightOf="@+id/stop_button"
-                android:layout_weight="1"/>
+            <!--<Button-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="开始"-->
+                <!--android:onClick="onClick"-->
+                <!--android:id="@+id/start_button"-->
+                <!--android:visibility="visible"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_toRightOf="@+id/stop_button"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textColor="#212121"-->
+                <!--android:background="#727272"/>-->
+            <!--<Button-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="暂停"-->
+                <!--android:onClick="onClick"-->
+                <!--android:id="@+id/pause_button"-->
+                <!--android:visibility="gone"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_toRightOf="@+id/stop_button"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textColor="#212121"-->
+                <!--android:background="#1976D2"/>-->
+            <!--<Button-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="继续"-->
+                <!--android:onClick="onClick"-->
+                <!--android:id="@+id/continue_button"-->
+                <!--android:visibility="gone"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_toRightOf="@+id/stop_button"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textColor="#212121"-->
+                <!--android:background="#1976D2"/>-->
 
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="结束"
-                android:onClick="onClick"
-                android:id="@+id/stop_button"
-                android:visibility="gone"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_weight="1"/>
+            <!--<Button-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="结束"-->
+                <!--android:onClick="onClick"-->
+                <!--android:id="@+id/stop_button"-->
+                <!--android:visibility="gone"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textColor="#212121"-->
+                <!--android:background="#FF4081"/>-->
         </LinearLayout>
     </LinearLayout>
-
+    <Button
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:tint="@android:color/white"
+        android:id="@+id/start_button"
+        android:onClick="onClick"
+        android:elevation="1dp"
+        android:background="@drawable/ripple"
+        android:stateListAnimator="@anim/fab_anim"
+        android:visibility="visible"
+        android:text="开始"
+        />
+    <Button
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:tint="@android:color/white"
+        android:id="@+id/stop_button"
+        android:onClick="onClick"
+        android:elevation="1dp"
+        android:background="@drawable/ripple"
+        android:stateListAnimator="@anim/fab_anim"
+        android:visibility="gone"
+        android:text="结束"
+        />
+    <Button
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="88dp"
+        android:tint="@android:color/white"
+        android:id="@+id/continue_button"
+        android:onClick="onClick"
+        android:elevation="1dp"
+        android:background="@drawable/ripplemore"
+        android:stateListAnimator="@anim/fab_anim"
+        android:visibility="gone"
+        android:text="继续"
+        />
+    <Button
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="88dp"
+        android:tint="@android:color/white"
+        android:id="@+id/pause_button"
+        android:onClick="onClick"
+        android:elevation="1dp"
+        android:background="@drawable/ripplemore"
+        android:stateListAnimator="@anim/fab_anim"
+        android:visibility="gone"
+        android:text="暂停"
+        />
 </RelativeLayout>
+
 

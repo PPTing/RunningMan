@@ -8,17 +8,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        >
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#212121"
             android:text="距离:" />
 
         <Button
             android:id="@+id/end_distance"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="#212121"/>
     </LinearLayout>
 
     <LinearLayout
@@ -29,12 +32,14 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="步数:" />
+            android:text="步数:"
+            android:textColor="#212121"/>
 
         <Button
             android:id="@+id/end_step"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="#212121"/>
     </LinearLayout>
 
     <LinearLayout
@@ -45,12 +50,14 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="卡路里:" />
+            android:text="卡路里:"
+            android:textColor="#212121"/>
 
         <Button
             android:id="@+id/end_cal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="#212121"/>
     </LinearLayout>
 
     <LinearLayout
@@ -61,12 +68,14 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="耗时:" />
+            android:text="耗时:"
+            android:textColor="#212121"/>
 
         <Button
             android:id="@+id/end_time"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="#212121"/>
     </LinearLayout>
 
 </LinearLayout>

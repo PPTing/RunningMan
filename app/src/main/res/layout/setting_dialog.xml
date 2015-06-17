@@ -31,12 +31,14 @@
             android:background="@android:color/transparent"
             android:layout_width="fill_parent"
             android:layout_weight="1"
-            android:text="体重："/>
+            android:text="体重："
+            android:textColor="#212121"/>
         <EditText
             android:id="@+id/weight"
             android:layout_width="fill_parent"
             android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="#212121"/>
     </LinearLayout>
 
 
