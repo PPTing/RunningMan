@@ -16,14 +16,18 @@ public class DBManager {
         db=helper.getWritableDatabase();
     }
     public void add(run_data run){
+        int i=1;
         android.util.Log.d("dbtest", "Manager add() start");
         android.database.Cursor cursor=db.rawQuery("select * from RUNNING",null);
         android.util.Log.d("dbtest", "Manager get the cursor");
-        cursor.moveToLast();
-        int i=cursor.getInt(cursor.getColumnIndex("id"));
-
-        android.util.Log.d("dbtest", "Manager count:"+i);
-        i++;
+        if(cursor.moveToFirst())
+        {
+            cursor.moveToLast();
+            Log.d("dbtest3", "Manager cursor move to last");
+            i=cursor.getInt(cursor.getColumnIndex("id"));
+            Log.d("dbtest", "Manager count:" + i);
+            i++;
+        }
         android.graphics.Bitmap bitmap=run.run_img;
         java.io.ByteArrayOutputStream os = new java.io.ByteArrayOutputStream();
         bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG,100,os);

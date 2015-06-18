@@ -1670,13 +1670,13 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f0c0025;
         public static final int action_bar_title=0x7f0c0024;
         public static final int action_context_bar=0x7f0c0042;
-        public static final int action_history=0x7f0c0069;
+        public static final int action_history=0x7f0c006a;
         public static final int action_menu_divider=0x7f0c0002;
         public static final int action_menu_presenter=0x7f0c0003;
         public static final int action_mode_bar=0x7f0c003e;
         public static final int action_mode_bar_stub=0x7f0c003d;
         public static final int action_mode_close_button=0x7f0c0026;
-        public static final int action_settings=0x7f0c0068;
+        public static final int action_settings=0x7f0c0069;
         public static final int activity_chooser_view_content=0x7f0c0027;
         public static final int alertTitle=0x7f0c0031;
         public static final int always=0x7f0c0017;
@@ -1719,11 +1719,12 @@ containing a value of this type.
         public static final int listMode=0x7f0c000a;
         public static final int listView=0x7f0c0064;
         public static final int list_item=0x7f0c002b;
-        public static final int list_row_date=0x7f0c0065;
-        public static final int list_row_id=0x7f0c0066;
+        public static final int list_row_date=0x7f0c0066;
+        public static final int list_row_id=0x7f0c0067;
         public static final int middle=0x7f0c0016;
         public static final int multiply=0x7f0c001f;
         public static final int never=0x7f0c001a;
+        public static final int noRecord=0x7f0c0065;
         public static final int none=0x7f0c000f;
         public static final int normal=0x7f0c000b;
         public static final int numberofstep=0x7f0c0053;
@@ -1765,7 +1766,7 @@ containing a value of this type.
         public static final int topPanel=0x7f0c002f;
         public static final int up=0x7f0c0009;
         public static final int useLogo=0x7f0c0013;
-        public static final int weight=0x7f0c0067;
+        public static final int weight=0x7f0c0068;
         public static final int withText=0x7f0c001b;
         public static final int wrap_content=0x7f0c001e;
     }

@@ -6,12 +6,14 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:id="@+id/list_row_date"
-        android:layout_weight="4"/>
+        android:layout_weight="4"
+        android:gravity="center_horizontal|center_vertical"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:id="@+id/list_row_id"
         android:layout_alignParentRight="true"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:gravity="center_horizontal|center_vertical"/>
 
 </LinearLayout><!-- From: file:/Users/PPTing/AndroidStudioProjects/RunningMan/app/src/main/res/layout/list_row.xml -->
