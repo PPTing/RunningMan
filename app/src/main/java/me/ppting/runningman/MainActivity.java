@@ -2,7 +2,10 @@ package me.ppting.runningman;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
@@ -36,15 +39,9 @@ import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import android.net.Uri;
-import android.provider.MediaStore.Images.Media;
-import android.content.DialogInterface.OnClickListener;
-import android.content.DialogInterface;
 
 public class MainActivity extends Activity //implements BDLocationListener
 {
@@ -87,6 +84,7 @@ public class MainActivity extends Activity //implements BDLocationListener
     private boolean isPauseTag=false;
     private boolean isStartPoint=true;
     private boolean isContinueTag=false;
+    private boolean isStopPause=true;
     int i=0;
 
     //计算距离
@@ -477,9 +475,9 @@ public class MainActivity extends Activity //implements BDLocationListener
                     }
                     if(isPauseTag)//点击暂停
                     {
-                        if(i<1)
+                        if(isStopPause)
                         {
-                            i++;
+
                             //点击暂停
                             LatLng mLastesPoint = new LatLng(location.getLatitude(), location.getLongitude());
                             //画标志
@@ -488,6 +486,7 @@ public class MainActivity extends Activity //implements BDLocationListener
                             OverlayOptions option = new MarkerOptions().position(mLastesPoint).icon(bitmap);
                             mBaiduMap.addOverlay(option);
                             Log.d("打印", "暂停点mLastesPoint");
+                            isStopPause=false;
                         }
                         //LatLng mFirstPoint = new com.baidu.mapapi.model.LatLng(location.getLatitude(),location.getLongitude());
                     }else
@@ -661,6 +660,7 @@ public class MainActivity extends Activity //implements BDLocationListener
                 stopbutton.setVisibility(View.VISIBLE);
                 isPauseTag=false;
                 isContinueTag=true;
+                isStopPause=true;
                 startService(service);
                 Log.d("按钮", "点击继续");
                 break;
