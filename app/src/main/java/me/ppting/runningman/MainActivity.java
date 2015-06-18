@@ -510,6 +510,7 @@ public class MainActivity extends Activity //implements BDLocationListener
                             //计算距离
                             double distances = DistanceUtil.getDistance(mFirstPoint, mNextPoint);
                             sum = sum + distances;
+                            //sum=formatDouble(sum);
                             Log.d("距离", "" + distances);
                             Log.d("距离和", "" + sum);
                             mFirstPoint = mNextPoint;
@@ -695,7 +696,7 @@ public class MainActivity extends Activity //implements BDLocationListener
         }
     }
     private void showenddialog() {
-        android.util.Log.d("tageee", calories + " " + total_step + " " + sum + " " + timer);
+        android.util.Log.d("tageee", formatDouble(calories) + " " + total_step + " " + formatDouble(sum) + " " + timer);
         end_cal.setText(formatDouble(calories) + "");
         end_step.setText(total_step+"");
         end_distance.setText(formatDouble(sum) + "");
