@@ -2,6 +2,7 @@ package me.ppting.runningman;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
@@ -37,6 +38,13 @@ import com.baidu.mapapi.utils.DistanceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import android.net.Uri;
+import android.provider.MediaStore.Images.Media;
+import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface;
 
 public class MainActivity extends Activity //implements BDLocationListener
 {
@@ -83,6 +91,8 @@ public class MainActivity extends Activity //implements BDLocationListener
 
     //计算距离
     private double sum;
+    //使用数据库
+    private DBManager mgr;
 
     //计步 卡路里
     private Thread thread;  //定义线程对象
@@ -118,7 +128,7 @@ public class MainActivity extends Activity //implements BDLocationListener
 
             step_count.setText("步数:" + total_step);
             cal_count.setText("卡路里:" + formatDouble(calories));
-            distancebutton.setText("距离:"+sum);
+            distancebutton.setText("距离:"+formatDouble(sum));
 
             android.util.Log.d("tag_totalstep", total_step + "");
 
@@ -134,7 +144,8 @@ public class MainActivity extends Activity //implements BDLocationListener
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
         //注意该方法要再setContentView方法之前实现
         this.context=this;
-        //SDKInitializer.initialize(this);
+        mgr=new DBManager(this);
+
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_main);
 
@@ -196,6 +207,12 @@ public class MainActivity extends Activity //implements BDLocationListener
             editText.setSelection(editText.getText().length());
             alterdialog.show();
             return true;
+        }
+        //查看历史记录
+        if(id==R.id.action_history){
+            Intent intent=new Intent();
+            intent.setClass(MainActivity.this, HistoryActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -265,38 +282,52 @@ public class MainActivity extends Activity //implements BDLocationListener
 
     private void init_dialog() {
         alterdialog = new android.app.AlertDialog.Builder(this).setTitle("设置").setView(dialogview). //actionbar弹出视图
-                setPositiveButton("保存", new android.content.DialogInterface.OnClickListener() {
+                setPositiveButton("保存", new OnClickListener() {
 
             @Override
-            public void onClick(android.content.DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
                 editor = sharedPreferences.edit();
                 editor.putString("weight", editText.getText().toString());
                 editor.commit();
             }
-        }).setNegativeButton("取消", new android.content.DialogInterface.OnClickListener() {
+        }).setNegativeButton("取消", new OnClickListener() {
 
             @Override
-            public void onClick(android.content.DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
             }
         }).create();
 
         endalterdialog = new android.app.AlertDialog.Builder(this).setTitle("详细数据").setView(layout).
-                setPositiveButton("返回", new android.content.DialogInterface.OnClickListener() {
+                setPositiveButton("返回", new OnClickListener() {
 
                     @Override
-                    public void onClick(android.content.DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which) {
                         // TODO Auto-generated method stub
 
                     }
                 }).
-                setNegativeButton("分享", new android.content.DialogInterface.OnClickListener() {
+                setNegativeButton("分享", new OnClickListener() {
 
                     @Override
-                    public void onClick(android.content.DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
                         // TODO Auto-generated method stub
-
+                        Intent intent=new Intent(Intent.ACTION_SEND);
+                        mBaiduMap=mmapView.getMap();
+                        mBaiduMap.snapshot(new BaiduMap.SnapshotReadyCallback()
+                        {
+                            @Override
+                            public void onSnapshotReady(android.graphics.Bitmap bitmap)
+                            {
+                                Uri uri = Uri.parse(android.provider.MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null, null));
+                                android.content.Intent intent = new android.content.Intent(Intent.ACTION_SEND);
+                                intent.setType("image/*");
+                                intent.putExtra(Intent.EXTRA_STREAM, uri);
+                                startActivity(intent);
+                            }
+                        });
                     }
                 }).create();
 
@@ -634,7 +665,21 @@ public class MainActivity extends Activity //implements BDLocationListener
                 Log.d("按钮", "点击继续");
                 break;
             case R.id.stop_button:
-                if(isrun) {
+                if(isrun)
+                {
+                    mBaiduMap = mmapView.getMap();
+                    mBaiduMap.snapshot(new BaiduMap.SnapshotReadyCallback() {
+                        @Override
+                        public void onSnapshotReady(android.graphics.Bitmap bitmap) {
+                            //获取一个run_data值
+                            SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+                            java.util.Date time=new java.util.Date(System.currentTimeMillis());
+                            String date=format.format(time);
+                            run_data run = new run_data(sum, total_step, calories, timer, bitmap, date);
+                            mgr.add(run);
+                            Log.d("dbtest", "MainActivity add a data");
+                        }
+                    });
                     startrecord.setVisibility(View.VISIBLE);
                     pausebutton.setVisibility(View.GONE);
                     continuebutton.setVisibility(View.GONE);

@@ -27,6 +27,8 @@
             >
         </service>
         <service android:name=".StepCounterService"></service>
+        <activity android:name=".HistoryActivity"/>
+        <activity android:name=".DetailActivity"/>
     </application>
     //配置百度地图权限
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />

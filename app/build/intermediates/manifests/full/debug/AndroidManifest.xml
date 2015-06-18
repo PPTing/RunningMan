@@ -70,6 +70,9 @@
             android:process=":remote" >
         </service>
         <service android:name="me.ppting.runningman.StepCounterService" />
+
+        <activity android:name="me.ppting.runningman.HistoryActivity" />
+        <activity android:name="me.ppting.runningman.DetailActivity" />
     </application>
 
 </manifest>
